@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>DxfFast.Interop</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>DxfFast Team</Authors>
+    <Description>High-performance DXF parser and geometry normalizer for .NET applications</Description>
+    <PackageTags>DXF;CAD;Parser;Geometry;Performance</PackageTags>
+    <RepositoryUrl>https://github.com/yourusername/dxf-fast</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 仅在存在对应原生文件时才打包到 NuGet -->
+    <None Include="..\..\target\release\dxf_fast_ffi.dll" Pack="true" PackagePath="runtimes\win-x64\native\dxf_fast_ffi.dll" Condition="Exists('..\..\target\release\dxf_fast_ffi.dll')" />
+    <None Include="..\..\target\release\libdxf_fast_ffi.so" Pack="true" PackagePath="runtimes\linux-x64\native\libdxf_fast_ffi.so" Condition="Exists('..\..\target\release\libdxf_fast_ffi.so')" />
+    <None Include="..\..\target\release\libdxf_fast_ffi.dylib" Pack="true" PackagePath="runtimes\osx-x64\native\libdxf_fast_ffi.dylib" Condition="Exists('..\..\target\release\libdxf_fast_ffi.dylib')" />
+  </ItemGroup>
+
+</Project>
